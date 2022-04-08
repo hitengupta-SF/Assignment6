@@ -30,13 +30,6 @@ class controller {
         } 
     }
     public async createUser(req: Request, res: Response) {
-        const users = await fs.readFile('./src/data/users.json', 'utf-8');
-        const newUser = req.body as User;
-        const data = JSON.parse(users) as User[];
-        newUser.id = data[data.length-1].id +1;
-        const newUsers = data.concat(newUser);
-        await fs.writeFile('./src/data/users.json', JSON.stringify(newUsers));
-        res.status(201).send("User added successfully!");
         
     }
     public async updateUser(req: Request, res: Response) {
