@@ -29,9 +29,6 @@ class controller {
             return;
         } 
     }
-    public async createUser(req: Request, res: Response) {
-        
-    }
     public async updateUser(req: Request, res: Response) {
         const data = await fs.readFile('./src/data/users.json', 'utf-8');
         const users = JSON.parse(data) as User[];
