@@ -8,7 +8,7 @@ export class UserCRUD implements CRUD <User>
     tableContainer: HTMLDivElement;
     tableEle : HTMLTableElement;
     myURL : string;
-    AddBtn : HTMLButtonElement;
+  
     addContainer : HTMLDivElement;
 
     constructor()
@@ -18,9 +18,6 @@ export class UserCRUD implements CRUD <User>
        this.tableContainer = document.querySelector('.table')!;
        this.myURL = `http://localhost:2500`;
        this.tableEle = document.createElement("table");
-       this.AddBtn = document.createElement("button");
-       this.AddBtn.classList.add("create-btn");
-       this.AddBtn.addEventListener('click',() => this.addUser());
        this.addContainer = document.querySelector('.AddContainer');
        this.initialize();
     }
@@ -55,8 +52,6 @@ export class UserCRUD implements CRUD <User>
             th.innerHTML = this.col[i];
             
         }
-        this.AddBtn.innerHTML = "Add User";
-        this.addContainer.append(this.AddBtn);
         this.users.forEach((user) => this.loadTableContent(user))
     
     }
