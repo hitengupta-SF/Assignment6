@@ -91,87 +91,13 @@ export class UserCRUD implements CRUD <User>
 
     addUser()
     {
-        let tr = this.tableEle.insertRow(-1);
-        let user: User;
-        for(let cols in this.col)
-        {
-           let td = tr.insertCell(-1);
-            td.contentEditable = "true";
-            td.setAttribute('id',`${this.col[cols]}`);
-
-            if(this.col[cols] == "role")
-            {
-                let select = document.createElement("select") as HTMLSelectElement;   
-                select.classList.add("select");
-                select.setAttribute('id','select');
-                for (const i in Role) {
-                   const option = document.createElement("option");
-                   option.value = i;
-                   option.textContent = i;
-    
-                    if (td.textContent === i) 
-                    {
-                        option.selected = true;
-                    }
-                    else option.selected = false;
-                    select.appendChild(option);
-                 }    
-                td.replaceWith(select);                
-            }
-        }
-
-        let submit = document.createElement("button");
-        submit.classList.add('submit');
-        submit.innerHTML = "Submit";
-        tr.append(submit);
-        
-        submit.addEventListener("click",()=> {
-            
-            for(let i =0;i<this.col.length;i++)
-            {
-                let cell = tr.children[i] as HTMLTableCellElement;
-                cell.contentEditable = "false";
-            }   
-            let selectedrole;
-            for(let i = 0; i<= 2;i++)
-            {
-                let s = tr.children[5].children[i] as HTMLOptionElement;
-                if(s.selected)
-                    {
-                         selectedrole = s.textContent!;
-                    }
-            } 
-
-            user = {
-                "id": 0,
-                "firstName": tr.cells.namedItem('firstName').textContent,
-                "middleName": tr.cells.namedItem('middleName').textContent,
-                "lastName": tr.cells.namedItem('lastName').textContent,
-                "email": tr.cells.namedItem('email').textContent,
-                "phone": tr.cells.namedItem('phone').textContent,
-                "role": selectedrole,
-                "address": tr.cells.namedItem('address').textContent
-            } 
-            
-            this.create(user);
-        });
+       
 
     }
 
     async  create(user:User)
     {
-        const addURL = this.myURL + '/add';
-        const response = await fetch(addURL, 
-            {
-             method: 'POST',
-             body: JSON.stringify(user),
-             headers: { 'Content-Type': 'application/json'}
-            }); 
-            const response1 = await fetch(this.myURL + '/users');
-            const data1 = await response1.json();
-            const newUser = data1[data1.length-1];
-            
-            this.users.push(newUser);
+        
             this.load();
 
     }
